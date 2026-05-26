@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TONI&GUY – India's Premier Luxury Hair Salon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════ TOKENS */
+:root{
+  --black:#0A0A0A; --near-black:#111111; --charcoal:#1C1C1C;
+  --gold:#C9A84C; --gold-light:#E8C97A; --gold-pale:#F5EDD3;
+  --white:#FFFFFF; --off-white:#F9F7F2; --cream:#F2EDE3;
+  --mid:#7A7A7A; --border:rgba(201,168,76,0.2);
+  --shadow:0 4px 32px rgba(0,0,0,0.35);
+  --r:4px; --r-lg:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+button{font-family:'Montserrat',sans-serif;cursor:pointer;}
+
+/* ═══════════════════════════════════ ANNOUNCE */
+.announce{background:var(--gold);color:var(--black);text-align:center;padding:.5rem 1rem;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;}
+
+/* ═══════════════════════════════════ NAV */
+nav{position:sticky;top:0;z-index:500;background:rgba(10,10,10,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.9rem 5%;max-width:1400px;margin:0 auto;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--white);}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:2.2rem;}
+.nav-links a{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a:hover::after{width:100%;}
+.nav-actions{display:flex;align-items:center;gap:1rem;}
+.nav-tel{font-size:.72rem;font-weight:600;letter-spacing:.1em;color:var(--gold);display:flex;align-items:center;gap:.4rem;}
+.btn-book{background:var(--gold);color:var(--black);border:none;padding:.6rem 1.5rem;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:background .2s,transform .15s;border-radius:var(--r);}
+.btn-book:hover{background:var(--gold-light);transform:translateY(-1px);}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:.4rem;cursor:pointer;}
+.hamburger span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.8);transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.mobile-menu{display:none;flex-direction:column;background:var(--charcoal);border-top:1px solid var(--border);padding:1.5rem 5%;gap:1.2rem;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s;}
+.mobile-menu.open{max-height:500px;padding:1.8rem 5%;}
+.mobile-menu a{font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);padding:.5rem 0;border-bottom:1px solid var(--border);}
+.mobile-menu a:last-child{border-bottom:none;}
+.mobile-menu a:hover{color:var(--gold);}
+
+/* ═══════════════════════════════════ HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:8rem 6% 5rem 7%;position:relative;z-index:2;}
+.hero-left::after{content:'';position:absolute;right:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);}
+.hero-eyebrow{font-size:.65rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem;}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold);}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:600;line-height:.97;color:var(--white);margin-bottom:1rem;letter-spacing:-.01em;}
+.hero-h1 em{color:var(--gold);font-style:italic;}
+.hero-tagline{font-size:.8rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:2.2rem;line-height:1.8;}
+.hero-actions{display:flex;align-items:center;gap:1.2rem;margin-bottom:3rem;}
+.btn-primary{background:var(--gold);color:var(--black);border:none;padding:.9rem 2.2rem;font-family:'Montserrat',sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;transition:background .2s,transform .15s;border-radius:var(--r);}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-ghost{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.3);padding:.85rem 2rem;font-family:'Montserrat',sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:border-color .2s,color .2s;border-radius:var(--r);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+.hero-stats{display:flex;gap:2.5rem;}
+.hs-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;color:var(--gold);line-height:1;}
+.hs-label{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.25rem;}
+.hero-right{position:relative;overflow:hidden;}
+.hero-img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.75) saturate(.9);}
+.hero-img-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,10,.6) 0%,transparent 50%);}
+.hero-float{position:absolute;bottom:3rem;right:2rem;background:rgba(10,10,10,.9);border:1px solid var(--border);padding:1.2rem 1.5rem;backdrop-filter:blur(10px);}
+.hf-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;font-weight:600;}
+.hf-val{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--white);}
+
+/* ═══════════════════════════════════ MARQUEE */
+.marquee-bar{background:var(--gold);padding:.7rem 0;overflow:hidden;white-space:nowrap;}
+.marquee-inner{display:inline-flex;animation:marquee 30s linear infinite;}
+.marquee-inner span{font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--black);padding:0 2.5rem;}
+.marquee-dot{opacity:.4;}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ═══════════════════════════════════ SECTIONS */
+.section{padding:6rem 7%;max-width:1400px;margin:0 auto;}
+.full-section{padding:6rem 7%;}
+.sec-label{font-size:.65rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;display:flex;align-items:center;gap:.7rem;}
+.sec-label::before{content:'';display:inline-block;width:24px;height:1px;background:var(--gold);}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:600;color:var(--white);line-height:1.1;margin-bottom:1rem;}
+.sec-title em{color:var(--gold);font-style:italic;}
+.sec-sub{font-size:.82rem;font-weight:300;color:rgba(255,255,255,.5);line-height:1.85;max-width:520px;}
+
+/* ═══════════════════════════════════ SERVICES */
+.services-bg{background:var(--near-black);}
+.services-layout{display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;padding-top:1rem;}
+.services-tabs{display:flex;flex-direction:column;gap:.3rem;position:sticky;top:100px;}
+.stab{background:none;border:none;text-align:left;padding:.85rem 1.2rem;font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);cursor:pointer;transition:all .2s;border-left:2px solid transparent;border-radius:0;}
+.stab.active,.stab:hover{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,.06);}
+.services-panels{}
+.spanel{display:none;}
+.spanel.active{display:block;}
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);}
+.svc-card{background:var(--near-black);padding:1.8rem;transition:background .2s;cursor:pointer;}
+.svc-card:hover{background:rgba(201,168,76,.06);}
+.svc-icon{font-size:1.6rem;margin-bottom:1rem;}
+.svc-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--white);margin-bottom:.4rem;}
+.svc-desc{font-size:.75rem;font-weight:300;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:.9rem;}
+.svc-from{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);}
+
+/* ═══════════════════════════════════ PRICING */
+.price-tabs{display:flex;gap:.5rem;margin-bottom:2.5rem;overflow-x:auto;scrollbar-width:none;padding-bottom:.3rem;}
+.price-tabs::-webkit-scrollbar{display:none;}
+.ptab{flex-shrink:0;background:transparent;border:1px solid var(--border);color:rgba(255,255,255,.5);padding:.55rem 1.3rem;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;border-radius:var(--r);}
+.ptab.active{background:var(--gold);border-color:var(--gold);color:var(--black);}
+.ptab:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+.price-panel{display:none;}
+.price-panel.active{display:block;}
+.price-list{display:flex;flex-direction:column;gap:0;}
+.price-item{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--border);gap:1rem;}
+.price-item:last-child{border-bottom:none;}
+.pi-name{font-size:.86rem;font-weight:500;color:rgba(255,255,255,.85);}
+.pi-note{font-size:.7rem;font-weight:300;color:rgba(255,255,255,.35);margin-top:.2rem;}
+.pi-price{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--gold);white-space:nowrap;}
+.price-disclaimer{font-size:.7rem;color:rgba(255,255,255,.3);margin-top:1.5rem;line-height:1.6;font-style:italic;}
+
+/* ═══════════════════════════════════ GALLERY */
+.gallery-bg{background:var(--charcoal);}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:280px 280px;gap:3px;margin-top:3rem;}
+.gitem{overflow:hidden;position:relative;cursor:pointer;}
+.gitem img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s,filter .4s;filter:saturate(.7) brightness(.85);}
+.gitem:hover img{transform:scale(1.07);filter:saturate(1) brightness(.75);}
+.gitem:nth-child(1){grid-column:span 2;grid-row:span 2;}
+.gitem:nth-child(4){grid-row:span 2;}
+.g-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;padding:1.5rem;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 50%);opacity:0;transition:opacity .3s;}
+.gitem:hover .g-overlay{opacity:1;}
+.g-label{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+
+/* ═══════════════════════════════════ ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.about-img-wrap{position:relative;}
+.about-img{width:100%;height:520px;object-fit:cover;display:block;filter:saturate(.85);}
+.about-accent{position:absolute;top:-20px;left:-20px;right:20px;bottom:20px;border:1px solid var(--border);z-index:-1;}
+.about-badge{position:absolute;bottom:-20px;right:-20px;background:var(--gold);padding:1.5rem;text-align:center;}
+.ab-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:var(--black);line-height:1;}
+.ab-label{font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,0,0,.65);}
+.about-text p{font-size:.84rem;font-weight:300;color:rgba(255,255,255,.6);line-height:1.9;margin-bottom:1rem;}
+.about-pillars{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem;}
+.ap{background:rgba(255,255,255,.03);border:1px solid var(--border);padding:1.2rem;border-radius:var(--r);}
+.ap-icon{font-size:1.3rem;margin-bottom:.5rem;}
+.ap-name{font-size:.78rem;font-weight:700;color:var(--white);margin-bottom:.2rem;}
+.ap-desc{font-size:.7rem;font-weight:300;color:rgba(255,255,255,.4);}
+
+/* ═══════════════════════════════════ TESTIMONIALS */
+.testi-bg{background:var(--near-black);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.testi-card{background:rgba(255,255,255,.03);border:1px solid var(--border);padding:2rem;border-radius:var(--r-lg);transition:border-color .2s;}
+.testi-card:hover{border-color:rgba(201,168,76,.5);}
+.tq{font-family:'Cormorant Garamond',serif;font-size:3rem;color:rgba(201,168,76,.25);line-height:.8;margin-bottom:1rem;}
+.tt{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:1.3rem;}
+.ta{display:flex;align-items:center;gap:.8rem;}
+.ta-avatar{width:38px;height:38px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--black);flex-shrink:0;}
+.ta-name{font-size:.8rem;font-weight:700;color:var(--white);}
+.ta-loc{font-size:.68rem;color:var(--mid);}
+.testi-stars{color:var(--gold);font-size:.85rem;letter-spacing:.08rem;margin-bottom:.8rem;}
+
+/* ═══════════════════════════════════ TEAM */
+.team-scroll{display:flex;gap:1.5rem;overflow-x:auto;scrollbar-width:none;padding-bottom:1rem;margin-top:3rem;}
+.team-scroll::-webkit-scrollbar{display:none;}
+.team-card{flex:0 0 230px;background:var(--charcoal);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;}
+.team-img{width:100%;height:260px;object-fit:cover;display:block;filter:grayscale(30%) saturate(.9);}
+.team-info{padding:1.2rem;}
+.team-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:.2rem;}
+.team-role{font-size:.67rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);}
+
+/* ═══════════════════════════════════ LOCATIONS */
+.locations-bg{background:var(--charcoal);}
+.locations-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem;}
+.loc-card{background:var(--near-black);border:1px solid var(--border);padding:1.5rem;border-radius:var(--r-lg);transition:border-color .25s,transform .25s;cursor:pointer;}
+.loc-card:hover{border-color:rgba(201,168,76,.5);transform:translateY(-3px);}
+.loc-city{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--white);margin-bottom:.4rem;}
+.loc-addr{font-size:.73rem;font-weight:300;color:rgba(255,255,255,.45);line-height:1.6;margin-bottom:.8rem;}
+.loc-phone{font-size:.72rem;font-weight:600;color:var(--gold);display:flex;align-items:center;gap:.4rem;}
+.loc-hours{font-size:.68rem;color:rgba(255,255,255,.3);margin-top:.4rem;}
+
+/* ═══════════════════════════════════ BOOKING STRIP */
+.booking-strip{background:linear-gradient(135deg,var(--charcoal),var(--near-black));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 7%;}
+.bs-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.bs-text .sec-title{margin-bottom:.8rem;}
+.bs-text p{font-size:.84rem;font-weight:300;color:rgba(255,255,255,.5);line-height:1.85;}
+.bs-form{background:rgba(255,255,255,.03);border:1px solid var(--border);padding:2.5rem;border-radius:var(--r-lg);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.fg{display:flex;flex-direction:column;gap:.4rem;}
+.fg label{font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.fg input,.fg select,.fg textarea{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:var(--r);padding:.75rem 1rem;font-family:'Montserrat',sans-serif;font-size:.85rem;color:var(--white);outline:none;transition:border-color .2s;width:100%;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);}
+.fg select option{background:var(--charcoal);}
+.fg textarea{resize:vertical;min-height:90px;}
+.fg.full{grid-column:1/-1;}
+.btn-submit{width:100%;background:var(--gold);color:var(--black);border:none;padding:1rem;font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border-radius:var(--r);transition:background .2s,transform .15s;margin-top:.5rem;}
+.btn-submit:hover{background:var(--gold-light);transform:translateY(-1px);}
+.form-success{display:none;text-align:center;padding:2rem 0;}
+.fs-icon{font-size:3rem;margin-bottom:1rem;display:block;}
+.fs-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--white);margin-bottom:.5rem;}
+.fs-sub{font-size:.82rem;color:rgba(255,255,255,.5);}
+
+/* ═══════════════════════════════════ FOOTER */
+footer{background:var(--near-black);border-top:1px solid var(--border);padding:4rem 7% 2rem;}
+.footer-inner{max-width:1400px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+.footer-brand-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;letter-spacing:.12em;color:var(--white);margin-bottom:.6rem;}
+.footer-brand-name span{color:var(--gold);}
+.footer-desc{font-size:.77rem;font-weight:300;color:rgba(255,255,255,.4);line-height:1.75;margin-bottom:1.2rem;}
+.footer-socials{display:flex;gap:.7rem;}
+.fsoc{width:36px;height:36px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:rgba(255,255,255,.55);transition:background .2s,color .2s;}
+.fsoc:hover{background:var(--gold);color:var(--black);}
+.fcol h4{font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,.7);margin-bottom:1.1rem;}
+.fcol ul{display:flex;flex-direction:column;gap:.6rem;}
+.fcol ul li a{font-size:.78rem;font-weight:400;color:rgba(255,255,255,.45);transition:color .2s;}
+.fcol ul li a:hover{color:var(--gold);}
+.footer-contact-row{display:flex;flex-direction:column;gap:.15rem;margin-bottom:.8rem;}
+.fcl{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);}
+.fcv{font-size:.78rem;color:rgba(255,255,255,.55);}
+.fcv a{color:var(--gold);}
+.footer-bottom{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-size:.7rem;color:rgba(255,255,255,.25);}
+.footer-legal{display:flex;gap:1.5rem;}
+.footer-legal a{font-size:.7rem;color:rgba(255,255,255,.25);transition:color .2s;}
+.footer-legal a:hover{color:var(--gold);}
+
+/* ═══════════════════════════════════ WA FLOAT */
+.wa-btn{position:fixed;right:1.8rem;bottom:1.8rem;z-index:400;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(37,211,102,.45);animation:pulse 2.5s infinite;text-decoration:none;}
+@keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.45);}50%{box-shadow:0 4px 32px rgba(37,211,102,.7);}}
+
+/* ═══════════════════════════════════ MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:600;align-items:center;justify-content:center;padding:1rem;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--charcoal);border:1px solid var(--border);border-radius:var(--r-lg);width:100%;max-width:500px;padding:2.5rem;position:relative;max-height:90vh;overflow-y:auto;animation:fadeUp .3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.modal-close{position:absolute;top:1.2rem;right:1.2rem;background:none;border:none;color:rgba(255,255,255,.4);font-size:1.4rem;cursor:pointer;line-height:1;}
+.modal-close:hover{color:var(--white);}
+
+/* ═══════════════════════════════════ TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(10px);background:var(--gold);color:var(--black);padding:.75rem 1.8rem;border-radius:50px;font-size:.78rem;font-weight:700;letter-spacing:.08em;z-index:700;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ═══════════════════════════════════ RESPONSIVE */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-left{padding:7rem 5% 3rem;order:2;}
+  .hero-left::after{display:none;}
+  .hero-right{height:50vw;order:1;}
+  .services-layout{grid-template-columns:1fr;gap:2rem;}
+  .services-tabs{flex-direction:row;position:static;overflow-x:auto;scrollbar-width:none;padding-bottom:.3rem;}
+  .services-tabs::-webkit-scrollbar{display:none;}
+  .stab{border-left:none;border-bottom:2px solid transparent;white-space:nowrap;border-radius:0;}
+  .stab.active,.stab:hover{border-left:none;border-bottom-color:var(--gold);background:transparent;}
+  .gallery-grid{grid-template-columns:repeat(3,1fr);grid-template-rows:200px 200px;}
+  .gitem:nth-child(1){grid-column:span 1;grid-row:span 1;}
+  .gitem:nth-child(4){grid-row:span 1;}
+  .about-grid{grid-template-columns:1fr;gap:3rem;}
+  .bs-inner{grid-template-columns:1fr;gap:2.5rem;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2rem;}
+  .locations-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .section,.full-section{padding:4rem 5%;}
+  .hero-h1{font-size:2.5rem;}
+  .testi-grid{grid-template-columns:1fr;}
+  .about-pillars{grid-template-columns:1fr 1fr;}
+  .form-grid{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .hero-stats{gap:1.5rem;}
+  .hs-num{font-size:1.8rem;}
+  .locations-grid{grid-template-columns:1fr 1fr;}
+  .services-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+  .hero-actions{flex-direction:column;align-items:flex-start;}
+  .btn-primary,.btn-ghost{width:100%;text-align:center;}
+  .gallery-grid{grid-template-columns:1fr;grid-template-rows:auto;}
+  .locations-grid{grid-template-columns:1fr;}
+  .about-pillars{grid-template-columns:1fr;}
+  .hero-stats{flex-wrap:wrap;gap:1.2rem;}
+  .bs-form{padding:1.5rem;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;}
+  .modal-box{padding:1.8rem 1.4rem;}
+  /* landscape phone */
+}
+@media screen and (orientation:landscape) and (max-height:500px){
+  .hero{grid-template-columns:1fr 1fr;min-height:100vh;}
+  .hero-left{padding:5rem 4% 3rem;order:1;}
+  .hero-left::after{display:block;}
+  .hero-right{height:100%;order:2;}
+  .hero-h1{font-size:2.2rem;}
+  .hero-tagline{font-size:.72rem;}
+  .hero-stats{gap:1.5rem;}
+  .hs-num{font-size:1.6rem;}
+  .section,.full-section{padding:2.5rem 4%;}
+  .services-layout{grid-template-columns:auto 1fr;gap:2rem;}
+  .services-tabs{flex-direction:column;position:sticky;top:80px;}
+  .stab{border-left:2px solid transparent;border-bottom:none;}
+  .stab.active,.stab:hover{border-left-color:var(--gold);background:rgba(201,168,76,.06);}
+  .gallery-grid{grid-template-columns:repeat(5,1fr);grid-template-rows:160px 160px;}
+  .gitem:nth-child(1){grid-column:span 2;grid-row:span 2;}
+  .gitem:nth-child(4){grid-row:span 2;}
+  .testi-grid{grid-template-columns:repeat(3,1fr);}
+  .about-grid{grid-template-columns:1fr 1fr;gap:3rem;}
+  .locations-grid{grid-template-columns:repeat(4,1fr);}
+  .bs-inner{grid-template-columns:1fr 1fr;}
+  .footer-top{grid-template-columns:2fr 1fr 1fr 1fr;}
+  nav{top:0;}
+  .announce{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+<a class="wa-btn" href="https://api.whatsapp.com/send?phone=917550075500" target="_blank">💬</a>
+
+<!-- ANNOUNCE -->
+<div class="announce">✦ Book Online & Get 15% Off Your First Visit ✦ Complimentary Hair Consultation With Every Appointment</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#"><span>TONI</span>&amp;<span>GUY</span></a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+      <a href="#locations">Locations</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a class="nav-tel" href="tel:07550075500">📞 0755-007-5500</a>
+      <button class="btn-book" onclick="openBookingModal()">Book Appointment</button>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#services" onclick="toggleMenu()">Services</a>
+    <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+    <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+    <a href="#about" onclick="toggleMenu()">About Us</a>
+    <a href="#locations" onclick="toggleMenu()">Locations</a>
+    <a href="#contact" onclick="toggleMenu()">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Since 1963 · British Excellence</div>
+    <h1 class="hero-h1">Where Style<br/>Meets <em>Artistry</em></h1>
+    <p class="hero-tagline">India's Premier Luxury Hair Salon · 120+ Centres · 48 Countries</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openBookingModal()">Book Appointment</button>
+      <a class="btn-ghost" href="#services">Explore Services</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hs-num">60+</div><div class="hs-label">Years of Excellence</div></div>
+      <div><div class="hs-num">120+</div><div class="hs-label">Centres in India</div></div>
+      <div><div class="hs-num">48</div><div class="hs-label">Countries Worldwide</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-img" src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1000&q=90" alt="Luxury Salon"/>
+    <div class="hero-img-overlay"></div>
+    <div class="hero-float">
+      <div class="hf-label">Next Available</div>
+      <div class="hf-val">Today · 3:00 PM</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    <span>Haircut & Style</span><span class="marquee-dot">✦</span>
+    <span>Hair Colour</span><span class="marquee-dot">✦</span>
+    <span>Balayage</span><span class="marquee-dot">✦</span>
+    <span>Keratin Treatment</span><span class="marquee-dot">✦</span>
+    <span>Bridal Packages</span><span class="marquee-dot">✦</span>
+    <span>Hair Spa</span><span class="marquee-dot">✦</span>
+    <span>Highlights</span><span class="marquee-dot">✦</span>
+    <span>Ombre & Balayage</span><span class="marquee-dot">✦</span>
+    <span>Makeup & Beauty</span><span class="marquee-dot">✦</span>
+    <span>Nail Art</span><span class="marquee-dot">✦</span>
+    <span>Haircut & Style</span><span class="marquee-dot">✦</span>
+    <span>Hair Colour</span><span class="marquee-dot">✦</span>
+    <span>Balayage</span><span class="marquee-dot">✦</span>
+    <span>Keratin Treatment</span><span class="marquee-dot">✦</span>
+    <span>Bridal Packages</span><span class="marquee-dot">✦</span>
+    <span>Hair Spa</span><span class="marquee-dot">✦</span>
+    <span>Highlights</span><span class="marquee-dot">✦</span>
+    <span>Ombre & Balayage</span><span class="marquee-dot">✦</span>
+    <span>Makeup & Beauty</span><span class="marquee-dot">✦</span>
+    <span>Nail Art</span><span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="services-bg" id="services">
+  <div class="section">
+    <div class="sec-label">What We Offer</div>
+    <h2 class="sec-title">Our <em>Services</em></h2>
+    <div class="services-layout" style="margin-top:2.5rem;">
+      <div class="services-tabs">
+        <button class="stab active" onclick="switchService('hair',this)">Hair Services</button>
+        <button class="stab" onclick="switchService('colour',this)">Hair Colour</button>
+        <button class="stab" onclick="switchService('treatment',this)">Treatments</button>
+        <button class="stab" onclick="switchService('beauty',this)">Beauty</button>
+        <button class="stab" onclick="switchService('bridal',this)">Bridal</button>
+      </div>
+      <div class="services-panels">
+        <!-- Hair -->
+        <div class="spanel active" id="sp-hair">
+          <div class="services-grid">
+            <div class="svc-card"><div class="svc-icon">✂️</div><div class="svc-name">Women's Haircut & Style</div><div class="svc-desc">Precision cut by our expert stylists, tailored to your face shape and lifestyle. Includes blow-dry and finish.</div><div class="svc-from">From ₹800</div></div>
+            <div class="svc-card"><div class="svc-icon">💈</div><div class="svc-name">Men's Haircut & Style</div><div class="svc-desc">Classic to contemporary cuts with master precision. Consultation included with every appointment.</div><div class="svc-from">From ₹600</div></div>
+            <div class="svc-card"><div class="svc-icon">💨</div><div class="svc-name">Blow-Dry & Finish</div><div class="svc-desc">Perfect salon-finish blowout for any occasion. Short, medium or long hair available.</div><div class="svc-from">From ₹500</div></div>
+            <div class="svc-card"><div class="svc-icon">👑</div><div class="svc-name">Style Director Haircut</div><div class="svc-desc">Exclusive cut by our senior Style Directors with 10+ years of expertise and international training.</div><div class="svc-from">From ₹2,500</div></div>
+          </div>
+        </div>
+        <!-- Colour -->
+        <div class="spanel" id="sp-colour">
+          <div class="services-grid">
+            <div class="svc-card"><div class="svc-icon">🎨</div><div class="svc-name">Full Head Colour</div><div class="svc-desc">Complete transformation with global colour using premium TONI&GUY branded products.</div><div class="svc-from">From ₹2,500</div></div>
+            <div class="svc-card"><div class="svc-icon">🌅</div><div class="svc-name">Balayage</div><div class="svc-desc">Sun-kissed natural colour with our signature hand-painting technique for a seamless, dimensional finish.</div><div class="svc-from">From ₹4,000</div></div>
+            <div class="svc-card"><div class="svc-icon">✨</div><div class="svc-name">Highlights & Foils</div><div class="svc-desc">Precision foil highlights to add dimension, brightness and movement to your hair.</div><div class="svc-from">From ₹2,000</div></div>
+            <div class="svc-card"><div class="svc-icon">🌊</div><div class="svc-name">Ombré Colour</div><div class="svc-desc">Seamless fade from dark roots to light ends for a stunning, modern gradient effect.</div><div class="svc-from">From ₹3,500</div></div>
+          </div>
+        </div>
+        <!-- Treatment -->
+        <div class="spanel" id="sp-treatment">
+          <div class="services-grid">
+            <div class="svc-card"><div class="svc-icon">💆</div><div class="svc-name">Keratin Treatment</div><div class="svc-desc">Brazilian keratin smoothing for frizz-free, silky, manageable hair lasting up to 3 months.</div><div class="svc-from">From ₹5,000</div></div>
+            <div class="svc-card"><div class="svc-icon">🛁</div><div class="svc-name">Hair Spa</div><div class="svc-desc">Deep conditioning and nourishing spa treatment for damaged or dry hair. Restore shine and softness.</div><div class="svc-from">From ₹1,500</div></div>
+            <div class="svc-card"><div class="svc-icon">💧</div><div class="svc-name">Scalp Treatment</div><div class="svc-desc">Targeted scalp therapy to address dandruff, dryness, and hair loss using professional grade products.</div><div class="svc-from">From ₹2,000</div></div>
+            <div class="svc-card"><div class="svc-icon">🌿</div><div class="svc-name">Organic Treatment</div><div class="svc-desc">Chemical-free, organic hair repair treatment using natural botanicals and plant-based ingredients.</div><div class="svc-from">From ₹3,000</div></div>
+          </div>
+        </div>
+        <!-- Beauty -->
+        <div class="spanel" id="sp-beauty">
+          <div class="services-grid">
+            <div class="svc-card"><div class="svc-icon">💅</div><div class="svc-name">Manicure & Pedicure</div><div class="svc-desc">Luxurious nail treatments using OPI and top-grade products. Classic, gel and nail art options.</div><div class="svc-from">From ₹800</div></div>
+            <div class="svc-card"><div class="svc-icon">👁️</div><div class="svc-name">Brow & Lash</div><div class="svc-desc">Threading, tinting, lamination and lash lift services to frame your face beautifully.</div><div class="svc-from">From ₹400</div></div>
+            <div class="svc-card"><div class="svc-icon">🌟</div><div class="svc-name">Facial & Skin</div><div class="svc-desc">Advanced facial treatments using luxury skincare brands for glowing, radiant skin.</div><div class="svc-from">From ₹2,000</div></div>
+            <div class="svc-card"><div class="svc-icon">💄</div><div class="svc-name">Makeup Services</div><div class="svc-desc">Professional makeup for events, parties, photoshoots and everyday glamour.</div><div class="svc-from">From ₹2,500</div></div>
+          </div>
+        </div>
+        <!-- Bridal -->
+        <div class="spanel" id="sp-bridal">
+          <div class="services-grid">
+            <div class="svc-card"><div class="svc-icon">💍</div><div class="svc-name">Bridal Makeup & Hair</div><div class="svc-desc">Timeless bridal looks crafted by our senior artists. Trial session included for all bridal packages.</div><div class="svc-from">From ₹8,000</div></div>
+            <div class="svc-card"><div class="svc-icon">🥂</div><div class="svc-name">Pre-Bridal Package</div><div class="svc-desc">Complete 4-session pre-bridal grooming protocol: skin, hair, nails and wellness preparation.</div><div class="svc-from">From ₹12,000</div></div>
+            <div class="svc-card"><div class="svc-icon">👰</div><div class="svc-name">Mehendi & Styling</div><div class="svc-desc">Bridal and sangeet styling with mehendi coordination for the full wedding look.</div><div class="svc-from">From ₹5,000</div></div>
+            <div class="svc-card"><div class="svc-icon">💫</div><div class="svc-name">Reception Look</div><div class="svc-desc">Glamorous reception-ready hair and makeup for the most important night of your life.</div><div class="svc-from">From ₹6,000</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="full-section" id="pricing" style="background:var(--black);">
+  <div style="max-width:1400px;margin:0 auto;">
+    <div class="sec-label">Transparent Pricing</div>
+    <h2 class="sec-title">Service <em>Price List</em></h2>
+    <p class="sec-sub" style="margin-bottom:2.5rem;">All prices are indicative. Final pricing may vary by city and stylist level. No hidden charges.</p>
+    <div class="price-tabs">
+      <button class="ptab active" onclick="switchPrice('women',this)">Women's Hair</button>
+      <button class="ptab" onclick="switchPrice('men',this)">Men's Hair</button>
+      <button class="ptab" onclick="switchPrice('colour-p',this)">Hair Colour</button>
+      <button class="ptab" onclick="switchPrice('treatment-p',this)">Treatments</button>
+      <button class="ptab" onclick="switchPrice('beauty-p',this)">Beauty</button>
+    </div>
+    <!-- Women -->
+    <div class="price-panel active" id="pp-women">
+      <div class="price-list">
+        <div class="price-item"><div><div class="pi-name">Haircut – Junior Stylist</div><div class="pi-note">Wash, cut & blow-dry</div></div><div class="pi-price">₹800 – ₹1,200</div></div>
+        <div class="price-item"><div><div class="pi-name">Haircut – Senior Stylist</div><div class="pi-note">Consultation + precision cut</div></div><div class="pi-price">₹1,200 – ₹2,000</div></div>
+        <div class="price-item"><div><div class="pi-name">Haircut – Style Director</div><div class="pi-note">Expert technique + styling</div></div><div class="pi-price">₹2,000 – ₹2,500</div></div>
+        <div class="price-item"><div><div class="pi-name">Blow-Dry (Short)</div></div><div class="pi-price">₹500 – ₹700</div></div>
+        <div class="price-item"><div><div class="pi-name">Blow-Dry (Long)</div></div><div class="pi-price">₹700 – ₹1,200</div></div>
+        <div class="price-item"><div><div class="pi-name">Hair Updo / Styling</div><div class="pi-note">Events and occasions</div></div><div class="pi-price">₹1,500 – ₹3,000</div></div>
+      </div>
+      <div class="price-disclaimer">* Prices may vary by city. Prices listed are for reference. Please call your nearest centre for exact pricing.</div>
+    </div>
+    <!-- Men -->
+    <div class="price-panel" id="pp-men">
+      <div class="price-list">
+        <div class="price-item"><div><div class="pi-name">Men's Haircut – Junior</div><div class="pi-note">Classic cut + finish</div></div><div class="pi-price">₹600 – ₹900</div></div>
+        <div class="price-item"><div><div class="pi-name">Men's Haircut – Senior</div></div><div class="pi-price">₹900 – ₹1,500</div></div>
+        <div class="price-item"><div><div class="pi-name">Men's Haircut – Style Director</div></div><div class="pi-price">₹1,500 – ₹2,500</div></div>
+        <div class="price-item"><div><div class="pi-name">Beard Trim & Shaping</div></div><div class="pi-price">₹300 – ₹600</div></div>
+        <div class="price-item"><div><div class="pi-name">Head Shave + Grooming</div></div><div class="pi-price">₹500 – ₹800</div></div>
+        <div class="price-item"><div><div class="pi-name">Hair Texture / Perming</div></div><div class="pi-price">₹2,000 – ₹4,000</div></div>
+      </div>
+      <div class="price-disclaimer">* Prices may vary by city. Please confirm with your local centre.</div>
+    </div>
+    <!-- Colour -->
+    <div class="price-panel" id="pp-colour-p">
+      <div class="price-list">
+        <div class="price-item"><div><div class="pi-name">Root Touch-Up</div><div class="pi-note">Based on hair length</div></div><div class="pi-price">₹1,500 – ₹2,500</div></div>
+        <div class="price-item"><div><div class="pi-name">Full Head Colour</div><div class="pi-note">Global application</div></div><div class="pi-price">₹2,500 – ₹5,000</div></div>
+        <div class="price-item"><div><div class="pi-name">Half Highlights</div></div><div class="pi-price">₹2,000 – ₹3,500</div></div>
+        <div class="price-item"><div><div class="pi-name">Full Highlights</div></div><div class="pi-price">₹3,500 – ₹6,000</div></div>
+        <div class="price-item"><div><div class="pi-name">Balayage / Ombré</div><div class="pi-note">Hand-painted technique</div></div><div class="pi-price">₹4,000 – ₹8,000</div></div>
+        <div class="price-item"><div><div class="pi-name">Toner / Gloss</div></div><div class="pi-price">₹1,000 – ₹2,000</div></div>
+      </div>
+      <div class="price-disclaimer">* Colour prices depend on hair length, density and product used. Consultation recommended before booking.</div>
+    </div>
+    <!-- Treatments -->
+    <div class="price-panel" id="pp-treatment-p">
+      <div class="price-list">
+        <div class="price-item"><div><div class="pi-name">Hair Spa (Basic)</div></div><div class="pi-price">₹1,500 – ₹2,500</div></div>
+        <div class="price-item"><div><div class="pi-name">Hair Spa (Advanced)</div><div class="pi-note">L'Oréal or Schwarzkopf</div></div><div class="pi-price">₹2,500 – ₹4,500</div></div>
+        <div class="price-item"><div><div class="pi-name">Keratin Treatment (Short)</div></div><div class="pi-price">₹5,000 – ₹8,000</div></div>
+        <div class="price-item"><div><div class="pi-name">Keratin Treatment (Long)</div></div><div class="pi-price">₹8,000 – ₹14,000</div></div>
+        <div class="price-item"><div><div class="pi-name">Scalp Therapy</div></div><div class="pi-price">₹2,000 – ₹3,500</div></div>
+        <div class="price-item"><div><div class="pi-name">Botox Hair Treatment</div></div><div class="pi-price">₹6,000 – ₹10,000</div></div>
+      </div>
+      <div class="price-disclaimer">* Treatment prices vary by hair length and product brand chosen.</div>
+    </div>
+    <!-- Beauty -->
+    <div class="price-panel" id="pp-beauty-p">
+      <div class="price-list">
+        <div class="price-item"><div><div class="pi-name">Classic Manicure</div></div><div class="pi-price">₹800 – ₹1,200</div></div>
+        <div class="price-item"><div><div class="pi-name">Gel Manicure / Pedicure</div></div><div class="pi-price">₹1,200 – ₹2,000</div></div>
+        <div class="price-item"><div><div class="pi-name">Eyebrow Threading + Tinting</div></div><div class="pi-price">₹500 – ₹800</div></div>
+        <div class="price-item"><div><div class="pi-name">Lash Lift & Tint</div></div><div class="pi-price">₹2,000 – ₹3,500</div></div>
+        <div class="price-item"><div><div class="pi-name">Party / Event Makeup</div></div><div class="pi-price">₹2,500 – ₹5,000</div></div>
+        <div class="price-item"><div><div class="pi-name">Facial (Basic / Advanced)</div></div><div class="pi-price">₹2,000 – ₹5,000</div></div>
+      </div>
+      <div class="price-disclaimer">* Prices are indicative. Please consult your nearest centre for exact service menus.</div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery-bg" id="gallery" style="background:var(--near-black);padding:6rem 0;">
+  <div style="padding:0 7%;max-width:1400px;margin:0 auto;">
+    <div class="sec-label">Our Work</div>
+    <h2 class="sec-title">Transformations & <em>Artistry</em></h2>
+  </div>
+  <div class="gallery-grid" style="margin:2.5rem 2px 0;">
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=85" alt="Salon"/><div class="g-overlay"><span class="g-label">Hair Styling</span></div></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&q=85" alt="Colour"/><div class="g-overlay"><span class="g-label">Balayage Colour</span></div></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=85" alt="Haircut"/><div class="g-overlay"><span class="g-label">Precision Cut</span></div></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=600&q=85" alt="Blow Dry"/><div class="g-overlay"><span class="g-label">Blow-Dry Finish</span></div></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&q=85" alt="Keratin"/><div class="g-overlay"><span class="g-label">Keratin Treatment</span></div></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&q=85" alt="Bridal"/><div class="g-overlay"><span class="g-label">Bridal Styling</span></div></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?w=600&q=85" alt="Nails"/><div class="g-overlay"><span class="g-label">Nail Art</span></div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" style="background:var(--charcoal);">
+  <div class="section">
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <img class="about-img" src="https://images.unsplash.com/photo-1596704017254-9b5e2a025acf?w=700&q=85" alt="Salon Interior"/>
+        <div class="about-accent"></div>
+        <div class="about-badge"><div class="ab-num">60+</div><div class="ab-label">Years of Art</div></div>
+      </div>
+      <div>
+        <div class="sec-label">Our Story</div>
+        <h2 class="sec-title">British <em>Heritage</em>,<br/>Indian Heart</h2>
+        <div class="about-text" style="margin-top:1.2rem;">
+          <p>Founded in London in 1963 by brothers Toni and Guy Mascolo, TONI&GUY has become one of the world's most iconic hair fashion brands, operating in 48 countries and over 480 salons worldwide.</p>
+          <p>In India, we bring decades of British hairdressing expertise to over 120 premium salons. Our mission is simple: to deliver world-class hair artistry with an understanding of local style sensibilities.</p>
+          <p>Education has always been at the heart of everything we do. Every TONI&GUY stylist undergoes rigorous, internationally certified training to ensure you receive the best possible service, every time.</p>
+        </div>
+        <div class="about-pillars">
+          <div class="ap"><div class="ap-icon">🎓</div><div class="ap-name">World-Class Training</div><div class="ap-desc">Every stylist certified to international standards</div></div>
+          <div class="ap"><div class="ap-icon">🌍</div><div class="ap-name">Global Presence</div><div class="ap-desc">48 countries, 480+ salons worldwide</div></div>
+          <div class="ap"><div class="ap-icon">✂️</div><div class="ap-name">Precision Artistry</div><div class="ap-desc">Expert cuts tailored to your unique style</div></div>
+          <div class="ap"><div class="ap-icon">🌿</div><div class="ap-name">Premium Products</div><div class="ap-desc">Exclusive TONI&GUY branded product range</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="testi-bg" style="padding:6rem 7%;">
+  <div style="max-width:1400px;margin:0 auto;">
+    <div class="sec-label">Client Love</div>
+    <h2 class="sec-title">What Our <em>Clients</em> Say</h2>
+    <div class="testi-grid">
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="tq">"</div><div class="tt">Stepping into TONI&GUY was like entering a haven for my hair. The experience was beyond delightful. The stylist listened attentively and the result was nothing short of spectacular.</div><div class="ta"><div class="ta-avatar">N</div><div><div class="ta-name">Neha Kapoor</div><div class="ta-loc">Delhi</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="tq">"</div><div class="tt">My hair had a new life, and I left the salon feeling like a confident, rejuvenated version of myself. TONI&GUY doesn't just style hair — they create moments of beauty and self-assurance.</div><div class="ta"><div class="ta-avatar">P</div><div><div class="ta-name">Priya Sharma</div><div class="ta-loc">Mumbai</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="tq">"</div><div class="tt">The balayage came out absolutely stunning. The stylist was incredibly knowledgeable and the whole experience from start to finish was luxurious and relaxing. Worth every rupee!</div><div class="ta"><div class="ta-avatar">A</div><div><div class="ta-name">Aishwarya Rao</div><div class="ta-loc">Bengaluru</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="tq">"</div><div class="tt">The keratin treatment was life-changing! My hair has never felt so smooth and silky. The staff was professional and the products they used were clearly top quality.</div><div class="ta"><div class="ta-avatar">R</div><div><div class="ta-name">Riya Menon</div><div class="ta-loc">Chennai</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="tq">"</div><div class="tt">Bridal package was exceptional. The team was patient, creative and really understood my vision. I felt like a queen on my wedding day — everyone kept complimenting my hair and makeup!</div><div class="ta"><div class="ta-avatar">S</div><div><div class="ta-name">Sneha Gupta</div><div class="ta-loc">Hyderabad</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="tq">"</div><div class="tt">Best haircut I've ever had in India. The Style Director completely transformed how I look. The consultation beforehand was thorough and he really listened to what I wanted.</div><div class="ta"><div class="ta-avatar">K</div><div><div class="ta-name">Karthik Nair</div><div class="ta-loc">Kochi</div></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TEAM -->
+<div style="background:var(--charcoal);padding:6rem 7%;">
+  <div style="max-width:1400px;margin:0 auto;">
+    <div class="sec-label">The Experts</div>
+    <h2 class="sec-title">Meet Our <em>Stylists</em></h2>
+    <p class="sec-sub">Our team of internationally trained stylists bring passion and precision to every chair.</p>
+    <div class="team-scroll">
+      <div class="team-card"><img class="team-img" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80" alt="Stylist"/><div class="team-info"><div class="team-name">Aditi Sharma</div><div class="team-role">Style Director</div></div></div>
+      <div class="team-card"><img class="team-img" src="https://images.unsplash.com/photo-1559599101-f09722fb4948?w=400&q=80" alt="Stylist"/><div class="team-info"><div class="team-name">Rahul Mehta</div><div class="team-role">Senior Colourist</div></div></div>
+      <div class="team-card"><img class="team-img" src="https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=400&q=80" alt="Stylist"/><div class="team-info"><div class="team-name">Preethi V</div><div class="team-role">Bridal Specialist</div></div></div>
+      <div class="team-card"><img class="team-img" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&q=80" alt="Stylist"/><div class="team-info"><div class="team-name">Arjun Nair</div><div class="team-role">Senior Stylist</div></div></div>
+      <div class="team-card"><img class="team-img" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="Stylist"/><div class="team-info"><div class="team-name">Meera Iyer</div><div class="team-role">Texture Expert</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- LOCATIONS -->
+<div class="locations-bg" id="locations" style="padding:6rem 7%;">
+  <div style="max-width:1400px;margin:0 auto;">
+    <div class="sec-label">Find Us</div>
+    <h2 class="sec-title">Our <em>Locations</em></h2>
+    <p class="sec-sub">Visit us at any of our premium salons across India. Walk-ins welcome, appointments preferred.</p>
+    <div class="locations-grid">
+      <div class="loc-card"><div class="loc-city">Delhi – Connaught Place</div><div class="loc-addr">N-12 Connaught Place,<br/>New Delhi – 110 001</div><div class="loc-phone"><span>📞</span><a href="tel:01147104710" style="color:var(--gold);">011-4710-4710</a></div><div class="loc-hours">⏰ Mon–Sat: 10AM–8PM · Sun: 11AM–7PM</div></div>
+      <div class="loc-card"><div class="loc-city">Mumbai – Bandra</div><div class="loc-addr">Turner Road, Bandra West,<br/>Mumbai – 400 050</div><div class="loc-phone"><span>📞</span><a href="tel:02226467467" style="color:var(--gold);">022-2646-7467</a></div><div class="loc-hours">⏰ Mon–Sat: 10AM–8PM · Sun: 11AM–7PM</div></div>
+      <div class="loc-card"><div class="loc-city">Bengaluru – Koramangala</div><div class="loc-addr">80 Feet Road, Koramangala,<br/>Bengaluru – 560 034</div><div class="loc-phone"><span>📞</span><a href="tel:08046464646" style="color:var(--gold);">080-4646-4646</a></div><div class="loc-hours">⏰ Mon–Sat: 10AM–8PM · Sun: 11AM–7PM</div></div>
+      <div class="loc-card"><div class="loc-city">Chennai – Nungambakkam</div><div class="loc-addr">45 Nungambakkam High Road,<br/>Chennai – 600 034</div><div class="loc-phone"><span>📞</span><a href="tel:04445454545" style="color:var(--gold);">044-4545-4545</a></div><div class="loc-hours">⏰ Mon–Sat: 10AM–8PM · Sun: 11AM–7PM</div></div>
+      <div class="loc-card"><div class="loc-city">Hyderabad – Banjara Hills</div><div class="loc-addr">Road No. 12, Banjara Hills,<br/>Hyderabad – 500 034</div><div class="loc-phone"><span>📞</span><a href="tel:04066776677" style="color:var(--gold);">040-6677-6677</a></div><div class="loc-hours">⏰ Mon–Sat: 10AM–8PM · Sun: 11AM–7PM</div></div>
+      <div class="loc-card"><div class="loc-city">Pune – Kalyani Nagar</div><div class="loc-addr">NIBM Road, Kalyani Nagar,<br/>Pune – 411 014</div><div class="loc-phone"><span>📞</span><a href="tel:02067676767" style="color:var(--gold);">020-6767-6767</a></div><div class="loc-hours">⏰ Mon–Sat: 10AM–8PM · Sun: 11AM–7PM</div></div>
+      <div class="loc-card"><div class="loc-city">Kochi – Marine Drive</div><div class="loc-addr">Marine Drive, Ernakulam,<br/>Kochi – 682 011</div><div class="loc-phone"><span>📞</span><a href="tel:04843838383" style="color:var(--gold);">0484-3838-383</a></div><div class="loc-hours">⏰ Mon–Sat: 10AM–8PM · Sun: 11AM–7PM</div></div>
+      <div class="loc-card"><div class="loc-city">Madurai – Anna Nagar</div><div class="loc-addr">Anna Nagar Main Road,<br/>Madurai – 625 020</div><div class="loc-phone"><span>📞</span><a href="tel:04524545454" style="color:var(--gold);">0452-4545-454</a></div><div class="loc-hours">⏰ Mon–Sat: 10AM–8PM · Sun: 11AM–7PM</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING STRIP -->
+<div class="booking-strip" id="contact">
+  <div class="bs-inner">
+    <div class="bs-text">
+      <div class="sec-label">Book Now</div>
+      <h2 class="sec-title">Reserve Your <em>Appointment</em></h2>
+      <p>Our team will confirm your appointment within 30 minutes. First-time clients receive a complimentary hair consultation. Walk-ins also welcome at all our centres.</p>
+      <div style="margin-top:2rem;display:flex;flex-direction:column;gap:.8rem;">
+        <div style="display:flex;align-items:center;gap:.8rem;font-size:.8rem;color:rgba(255,255,255,.5);"><span style="color:var(--gold);">✦</span> Complimentary hair consultation included</div>
+        <div style="display:flex;align-items:center;gap:.8rem;font-size:.8rem;color:rgba(255,255,255,.5);"><span style="color:var(--gold);">✦</span> 15% off on your first visit</div>
+        <div style="display:flex;align-items:center;gap:.8rem;font-size:.8rem;color:rgba(255,255,255,.5);"><span style="color:var(--gold);">✦</span> Flexible rescheduling up to 24hrs prior</div>
+      </div>
+    </div>
+    <div class="bs-form">
+      <div id="booking-form-wrap">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--white);margin-bottom:1.2rem;">Book Your Appointment</div>
+        <div class="form-grid">
+          <div class="fg"><label>First Name *</label><input id="b-fname" placeholder="Your name"/></div>
+          <div class="fg"><label>Last Name *</label><input id="b-lname" placeholder="Last name"/></div>
+          <div class="fg"><label>Mobile *</label><input id="b-phone" type="tel" placeholder="+91 98765 43210"/></div>
+          <div class="fg"><label>Email</label><input id="b-email" type="email" placeholder="email@example.com"/></div>
+          <div class="fg"><label>Service *</label>
+            <select id="b-service">
+              <option value="">Select Service</option>
+              <optgroup label="Hair Services">
+                <option>Women's Haircut & Style</option>
+                <option>Men's Haircut & Style</option>
+                <option>Style Director Haircut</option>
+                <option>Blow-Dry & Finish</option>
+              </optgroup>
+              <optgroup label="Hair Colour">
+                <option>Full Head Colour</option>
+                <option>Balayage / Ombré</option>
+                <option>Highlights & Foils</option>
+                <option>Root Touch-Up</option>
+              </optgroup>
+              <optgroup label="Treatments">
+                <option>Keratin Treatment</option>
+                <option>Hair Spa</option>
+                <option>Scalp Treatment</option>
+              </optgroup>
+              <optgroup label="Beauty">
+                <option>Manicure & Pedicure</option>
+                <option>Brow & Lash</option>
+                <option>Makeup Services</option>
+              </optgroup>
+              <optgroup label="Bridal">
+                <option>Bridal Makeup & Hair</option>
+                <option>Pre-Bridal Package</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="fg"><label>City *</label>
+            <select id="b-city">
+              <option value="">Select City</option>
+              <option>Delhi</option><option>Mumbai</option><option>Bengaluru</option>
+              <option>Chennai</option><option>Hyderabad</option><option>Pune</option>
+              <option>Kochi</option><option>Madurai</option><option>Kolkata</option>
+              <option>Ahmedabad</option><option>Jaipur</option>
+            </select>
+          </div>
+          <div class="fg"><label>Preferred Date *</label><input id="b-date" type="date"/></div>
+          <div class="fg"><label>Time Slot</label>
+            <select id="b-time">
+              <option>10:00 AM – 12:00 PM</option>
+              <option>12:00 PM – 2:00 PM</option>
+              <option>2:00 PM – 4:00 PM</option>
+              <option>4:00 PM – 6:00 PM</option>
+              <option>6:00 PM – 8:00 PM</option>
+            </select>
+          </div>
+          <div class="fg full"><label>Special Requests</label><textarea id="b-notes" placeholder="Any specific requests, allergies or preferences…"></textarea></div>
+        </div>
+        <button class="btn-submit" onclick="submitBooking()">Confirm Appointment</button>
+      </div>
+      <div class="form-success" id="booking-success">
+        <span class="fs-icon">✅</span>
+        <div class="fs-title">Appointment Confirmed!</div>
+        <p class="fs-sub">Thank you! Our team will call you within 30 minutes to confirm. See you soon!</p>
+        <button style="margin-top:1.5rem;background:var(--gold);color:var(--black);border:none;padding:.75rem 2rem;border-radius:var(--r);font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;" onclick="resetForm()">Book Another</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name"><span>TONI</span>&amp;<span>GUY</span></div>
+        <p class="footer-desc">India's premier luxury hair salon since 1963. Expert styling, premium colour and world-class treatments at 120+ centres across India.</p>
+        <div class="footer-socials">
+          <a class="fsoc" href="https://www.instagram.com/toniandguyindia/" target="_blank">IG</a>
+          <a class="fsoc" href="https://www.facebook.com/" target="_blank">FB</a>
+          <a class="fsoc" href="https://www.youtube.com/" target="_blank">YT</a>
+          <a class="fsoc" href="https://api.whatsapp.com/send?phone=917550075500" target="_blank">WA</a>
+        </div>
+      </div>
+      <div class="fcol">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Haircut & Style</a></li>
+          <li><a href="#services">Hair Colour</a></li>
+          <li><a href="#services">Balayage</a></li>
+          <li><a href="#services">Keratin Treatment</a></li>
+          <li><a href="#services">Hair Spa</a></li>
+          <li><a href="#services">Bridal Packages</a></li>
+          <li><a href="#services">Makeup & Beauty</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#pricing">Price List</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#locations">Locations</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Franchise</a></li>
+          <li><a href="#">Gift Cards</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h4>Contact</h4>
+        <div class="footer-contact-row"><span class="fcl">Helpline</span><span class="fcv"><a href="tel:07550075500">0755-007-5500</a></span></div>
+        <div class="footer-contact-row"><span class="fcl">Head Office</span><span class="fcv">Paulsons Group<br/>Vadapalani, Chennai – 600026<br/>Tamil Nadu, India</span></div>
+        <div class="footer-contact-row"><span class="fcl">Hours</span><span class="fcv">Mon–Sat: 10AM – 8PM<br/>Sun: 11AM – 7PM</span></div>
+        <div class="footer-contact-row"><span class="fcl">Email</span><span class="fcv"><a href="mailto:info@toniandguyindia.com">info@toniandguyindia.com</a></span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 TONI&GUY India (Paulsons). All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Refund Policy</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="modal" onclick="if(event.target.id==='modal')closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-form-inner">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--white);margin-bottom:.4rem;">Book Your Appointment</div>
+      <div style="font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:1.5rem;">Our team will confirm within 30 minutes.</div>
+      <div style="display:flex;flex-direction:column;gap:.9rem;">
+        <div class="fg"><label>Full Name *</label><input id="m-name" placeholder="Your full name"/></div>
+        <div class="fg"><label>Mobile Number *</label><input id="m-phone" type="tel" placeholder="+91 98765 43210"/></div>
+        <div class="fg"><label>Service *</label>
+          <select id="m-service">
+            <option value="">Select a Service</option>
+            <option>Women's Haircut & Style</option>
+            <option>Men's Haircut & Style</option>
+            <option>Hair Colour / Balayage</option>
+            <option>Keratin Treatment</option>
+            <option>Hair Spa</option>
+            <option>Bridal Package</option>
+            <option>Makeup & Beauty</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg"><label>City *</label>
+          <select id="m-city">
+            <option value="">Select City</option>
+            <option>Delhi</option><option>Mumbai</option><option>Bengaluru</option>
+            <option>Chennai</option><option>Hyderabad</option><option>Pune</option>
+            <option>Kochi</option><option>Madurai</option>
+          </select>
+        </div>
+        <div class="fg"><label>Preferred Date</label><input id="m-date" type="date"/></div>
+        <button class="btn-submit" onclick="submitModal()">Confirm Appointment</button>
+      </div>
+    </div>
+    <div id="modal-success" style="display:none;text-align:center;padding:1.5rem 0;">
+      <div style="font-size:3rem;margin-bottom:1rem;">✅</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--white);margin-bottom:.5rem;">Appointment Confirmed!</div>
+      <div style="font-size:.82rem;color:rgba(255,255,255,.5);">Our team will call you within 30 minutes. Thank you!</div>
+      <button style="margin-top:1.5rem;background:var(--gold);color:var(--black);border:none;padding:.75rem 2rem;border-radius:var(--r);font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;" onclick="closeModal()">Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Toast
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+// Nav
+function toggleMenu(){
+  const m=document.getElementById('mobile-menu');
+  const h=document.getElementById('hamburger');
+  m.classList.toggle('open');
+  h.classList.toggle('open');
+}
+// Modal
+function openBookingModal(){
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+  const today=new Date().toISOString().split('T')[0];
+  document.getElementById('m-date').min=today;
+  document.getElementById('m-date').value=today;
+}
+function closeModal(){
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(()=>{
+    document.getElementById('modal-form-inner').style.display='block';
+    document.getElementById('modal-success').style.display='none';
+  },400);
+}
+function submitModal(){
+  const name=document.getElementById('m-name').value.trim();
+  const phone=document.getElementById('m-phone').value.trim();
+  const svc=document.getElementById('m-service').value;
+  const city=document.getElementById('m-city').value;
+  if(!name||!phone||!svc||!city){showToast('Please fill all required fields');return;}
+  document.getElementById('modal-form-inner').style.display='none';
+  document.getElementById('modal-success').style.display='block';
+  showToast('Appointment confirmed! ✨');
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+// Services tab
+function switchService(id,btn){
+  document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.spanel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('sp-'+id).classList.add('active');
+}
+// Price tab
+function switchPrice(id,btn){
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.price-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('pp-'+id).classList.add('active');
+}
+// Booking form
+function submitBooking(){
+  const fname=document.getElementById('b-fname').value.trim();
+  const phone=document.getElementById('b-phone').value.trim();
+  const svc=document.getElementById('b-service').value;
+  const city=document.getElementById('b-city').value;
+  const date=document.getElementById('b-date').value;
+  if(!fname||!phone||!svc||!city||!date){showToast('Please fill all required fields');return;}
+  document.getElementById('booking-form-wrap').style.display='none';
+  document.getElementById('booking-success').style.display='block';
+  showToast('Appointment booked! ✨');
+}
+function resetForm(){
+  document.getElementById('booking-form-wrap').style.display='block';
+  document.getElementById('booking-success').style.display='none';
+  document.getElementById('b-fname').value='';
+  document.getElementById('b-phone').value='';
+}
+// Set min date
+const today=new Date().toISOString().split('T')[0];
+document.getElementById('b-date').min=today;
+document.getElementById('b-date').value=today;
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const el=document.querySelector(a.getAttribute('href'));
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}
+  });
+});
+</script>
+</body>
+</html>
